@@ -1,0 +1,69 @@
+wget2 (2.0.0~pre0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Add autogen because working from snapshot.
+  * Scratch that; manually run
+    ./bootstrap
+    autoreconf --force --install --symlink --warnings=all
+    and then make a tarball by hand, instead of using "git archive".
+
+  * FTBFS2 because "make distclean; make distclean" is broken upstream
+  * FTBFS2 because po/*.po change, because they're not part of git, but
+    rather are downloaded for a different source version from 
+    https://translationproject.org/latest/wget2/.
+
+  * Add libzstd-dev dependency.
+  * Add libmicrohttpd-dev for "make test".  Is this a bad idea?
+  * FIXME: can't add libhsts-dev dependency -- not in Debian!
+    In wget2 1.99.2, this was in-house.
+    Now it is spun off into a separate library.
+    Until Debian has that library
+
+  * Add usr/share/locale to wget2 (FIXME: wget2-common?)
+
+  * Ship the *.a and *.la files
+
+ -- Trent W. Buck <trentbuck@gmail.com>  Wed, 01 Sep 2021 16:47:11 +1000
+
+wget2 (1.99.1-2.2) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Rebuild against new gnulib snapshot (20210102).
+  * debian/control: replace old build-dependency libidn2-0-dev with
+    libidn2-dev. (Closes: #975030)
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 26 Jan 2021 11:21:32 -0500
+
+wget2 (1.99.1-2.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Rebuild against new gnulib snapshot (20200127).
+  * debian/control: Add explicit build-dependency on texinfo.
+    (Closes: #949081)
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 28 Jan 2020 14:51:45 -0500
+
+wget2 (1.99.1-2) unstable; urgency=medium
+
+  * added missing manpages to the packages. closes: Bug#898132
+  * added features: pcre2, brotli, gpgme (for automatic signature verification)
+
+ -- Noël Köthe <noel@debian.org>  Thu, 17 May 2018 22:13:56 +0200
+
+wget2 (1.99.1-1) unstable; urgency=medium
+
+  * second alpha release from 2018-05-01 closes: Bug#887630
+
+ -- Noël Köthe <noel@debian.org>  Sun, 06 May 2018 16:03:22 +0200
+
+wget2 (1.99.0-1) unstable; urgency=medium
+
+  * new upstream release with FTBFS fix closes: Bug#887630
+
+ -- Noël Köthe <noel@debian.org>  Wed, 28 Feb 2018 20:43:43 +0100
+
+wget2 (0.0.20170806-1) unstable; urgency=low
+
+  * Initial release of wget2 the successor of wget
+
+ -- Noël Köthe <noel@debian.org>  Mon, 07 Aug 2017 17:38:26 +0200

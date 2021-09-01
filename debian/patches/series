@@ -1,0 +1,2 @@
+appease-autoreconf
+repeated-make-distclean-should-noop-not-error

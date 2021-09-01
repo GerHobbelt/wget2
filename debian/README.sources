@@ -1,0 +1,48 @@
+I initially tried this:
+
+    git archive tmp-prepare-v2.0.0 | xz -9ve >../wget2_2.0.0~pre0.orig.tar.xz
+
+but that was missing gnulib stuff.
+So I noticed git submodules.
+
+git submodule and git archive aren't friends, so like everyone else, I rolled my own.
+Also GNU tar is annoying.
+
+    #!/bin/sh
+    git submodule init
+    git submodule update
+    d=$(mktemp --tmpdir="${TMPDIR:-/tmp}" -dt with-temp-dir.XXXXXX)
+    trap 'rm -rf "$d"' 0 INT TERM QUIT
+    git archive HEAD >"$d"/a
+    GIT_DIR=gnulib/.git git archive --prefix=gnulib/ HEAD >"$d"/b
+    GIT_DIR=wiki/.git git archive --prefix=wiki/ HEAD >"$d"/c
+    tar --concatenate --file "$d"/a "$d"/b
+    tar --concatenate --file "$d"/a "$d"/c
+    xz -9ev < "$d"/a >../wget2_2.0.0~pre0.orig.tar.xz
+
+
+That still wasn't working because ACTUALLY it wants lib/ to be
+populated with an auto-generated subset of gnulib/**, including files
+that are generated from templates.
+
+So I tried something like this:
+
+    ./bootstrap
+    tar -C .. --xz -cf ../wget2_2.0.0~pre0.orig.tar.xz --exclude .git wget2
+
+That seemed to be basically Good EnoughTM.
+
+However it is downloading .po files for the wrong release, so it fails to build *twice*.
+
+So to do the actual build I resorted to a really big hammer:
+
+    rm -rf wget2
+    tar -xf wget2_2.0.0~pre0.orig.tar.xz
+    cp -a wget2-debian wget2/debian
+    cd wget2
+    debuild -uc -us -tc
+
+This, FINALLY, seems to be working OK.
+
+
+PS: I also had to make sure "make distclean" was a noop (not an error) if run before ./configure.

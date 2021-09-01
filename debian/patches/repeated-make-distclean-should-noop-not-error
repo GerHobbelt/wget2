@@ -1,0 +1,40 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ wget2 (2.0.0~pre0-1) UNRELEASED; urgency=medium
+ .
+   * New upstream release.
+   * Add autogen because working from snapshot.
+   * Scratch that; manually run
+     ./bootstrap
+     autoreconf --force --install --symlink --warnings=all
+     and then make a tarball by hand, instead of using "git archive".
+Author: Trent W. Buck <trentbuck@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2021-09-01
+
+--- wget2-2.0.0~pre0.orig/GNUmakefile
++++ wget2-2.0.0~pre0/GNUmakefile
+@@ -105,7 +105,6 @@ endif
+ abort-due-to-no-makefile:
+ 	@echo There seems to be no Makefile in this directory.   1>&2
+ 	@echo "You must run ./configure before running '$(MAKE)'." 1>&2
+-	@exit 1
+ 
+ endif
+ 

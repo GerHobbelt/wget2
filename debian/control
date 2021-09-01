@@ -1,0 +1,67 @@
+Source: wget2
+Priority: optional
+Maintainer: Noël Köthe <noel@debian.org>
+Build-Depends: debhelper-compat (= 13), pkg-config, doxygen, pandoc, gettext, zlib1g-dev, liblzma-dev, libbz2-dev, libbrotli-dev, libpcre2-dev, libzstd-dev, libgnutls28-dev, libidn11-dev, libidn2-dev, flex, libpsl-dev, automake, dh-strip-nondeterminism, gnulib, libnghttp2-dev, graphviz, libgpgme-dev, texinfo, libmicrohttpd-dev
+Standards-Version: 4.1.4
+Section: web
+Homepage: https://gitlab.com/gnuwget/wget2
+Vcs-Git: https://gitlab.com/gnuwget/wget2.git
+Vcs-Browser: https://gitlab.com/gnuwget/wget2
+
+Package: wget2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libwget0
+Recommends: ca-certificates
+Description: file and recursive website downloader
+ GNU Wget is a network utility to retrieve files from the web
+ using HTTP(S) and FTP, the two most widely used internet
+ protocols. It works non-interactively, so it will work in
+ the background, after having logged off. The program supports
+ recursive retrieval of web-authoring pages as well as FTP
+ sites -- you can use Wget to make mirrors of archives and
+ home pages or to travel the web like a WWW robot.
+ .
+ Wget works particularly well with slow or unstable connections
+ by continuing to retrieve a document until the document is fully
+ downloaded. Re-getting files from where it left off works on
+ servers (both HTTP and FTP) that support it. Both HTTP and FTP
+ retrievals can be time stamped, so Wget can see if the remote
+ file has changed since the last retrieval and automatically
+ retrieve the new version if it has.
+ .
+ Wget supports proxy servers; this can lighten the network load,
+ speed up retrieval, and provide access behind firewalls.
+ .
+ GNU Wget2 is the successor of GNU Wget.
+
+Package: libwget0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Download library for files and recursive websites
+ GNU Wget is a network utility to retrieve files from the web
+ using HTTP(S) and FTP, the two most widely used internet
+ protocols. It works non-interactively, so it will work in
+ the background, after having logged off. The program supports
+ recursive retrieval of web-authoring pages as well as FTP
+ sites -- you can use Wget to make mirrors of archives and
+ home pages or to travel the web like a WWW robot.
+ .
+ This is the library that provides the basic functions needed by
+ a webclient.
+
+Package: wget2-dev
+Section: libdevel
+Architecture: any
+Depends: wget2 (= ${binary:Version}), ${misc:Depends}
+Description: development file for libwget2
+ GNU Wget is a network utility to retrieve files from the web
+ using HTTP(S) and FTP, the two most widely used internet
+ protocols. It works non-interactively, so it will work in
+ the background, after having logged off. The program supports
+ recursive retrieval of web-authoring pages as well as FTP
+ sites -- you can use Wget to make mirrors of archives and
+ home pages or to travel the web like a WWW robot.
+ .
+ These are the development files to build software with libwget.
+

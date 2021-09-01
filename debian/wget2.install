@@ -1,0 +1,12 @@
+# 15:36 <twb> What's usr/bin/wget2_noinstall ?
+# 15:37 <darnir[m]> Its an ugly hack
+# 15:37 <twb> ahahaha
+# 15:38 <darnir[m]> That's the real Wget2 binary
+# 15:39 <twb> But I don't actually need it once /usr/bin/wget2 exists?
+# 15:39 <darnir[m]> The /usr/bin/wget2 is a libtool script that invokes _noinstall with the right linking
+# 15:40 <darnir[m]> You need both
+
+
+usr/bin/wget2*
+usr/share/man/man1/wget2.1
+usr/share/locale
